@@ -23,4 +23,29 @@ public class player : MonoBehaviour
     private AudioSource aud;
     private Rigidbody2D rid;
     private Animator ani;
+
+    private void Move()
+    {
+        
+    }
+
+    private void Jump()
+    {
+
+    }
+
+    private void Shoot()
+    {
+
+    }
+
+    private void Hurt(float damage)
+    {
+
+    }
+
+    private void Dead()
+    {
+
+    }
 }
