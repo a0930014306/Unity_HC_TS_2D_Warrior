@@ -7,7 +7,7 @@ public class player : MonoBehaviour
     [Header("移動速度"), Range(0, 1000)]
     public float movespeed = 15;
     [Header("跳躍高度"), Range(0, 3000)]
-    public int jump = 750;
+    public int jump = 850;
     [Header("是否在地板上")]
     public bool ground = true;
     [Header("子彈")]
