@@ -20,6 +20,10 @@ public class player : MonoBehaviour
     public AudioClip shootaud;
     [Header("血量"), Range(0, 200)]
     public int hp = 100;
+    [Header("地面判定位移")]
+    public Vector3 groundmove;
+    [Header("地面判定半徑")]
+    public float radius = 0.5f;
 
     private AudioSource aud;
     private Rigidbody2D rig;
@@ -48,6 +52,15 @@ public class player : MonoBehaviour
         Move();
         Jump();
     }
+
+    //在 unity 繪製圖示
+    private void OnDrawGizmos()
+    {
+        //圖示.顏色 = 顏色
+        Gizmos.color = new Color(1, 0, 0, 0.35f);
+        //圖示.繪製球體(中心點,半徑)
+        Gizmos.DrawSphere(transform.position + groundmove, radius);
+    }
     /// <summary>
     /// 取得水平軸向
     /// </summary>
@@ -57,7 +70,7 @@ public class player : MonoBehaviour
         h = Input.GetAxis("Horizontal");
     }
 
-   
+
     private void Move()
     {
 
@@ -74,14 +87,14 @@ public class player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A) || (Input.GetKeyDown(KeyCode.LeftArrow)))
         {
-            transform.localEulerAngles =new Vector3(0,180,0);
+            transform.localEulerAngles = new Vector3(0, 180, 0);
 
         }
 
         ani.SetBool("跑步開關", h != 0);
     }
 
-    
+
 
     private void Jump()
     {
@@ -89,13 +102,26 @@ public class player : MonoBehaviour
         if (ground && Input.GetKeyDown(KeyCode.Space))
         {
             //剛體.添加推力(二維向量);
-            rig.AddForce(new Vector2(0 , jump));
-            //不在地板上
-            ground = false;
-            
+            rig.AddForce(new Vector2(0, jump));
+
         }
 
-        
+        //碰撞物件 = 2D 物理.覆蓋圓形(中心點,半徑,圖層) 有layerMask(圖層編號) 以 1<<圖層 表示
+        Collider2D hit = Physics2D.OverlapCircle(transform.position + groundmove, radius, 1 << 8);
+
+        //如果 在地面上 是否在地面上 = 是
+        if (hit)
+        {
+            ground = true;
+        }
+        //否則 是否在地面上 = 否
+        else
+        {
+            ground = false;
+        }
+
+
+
     }
 
     private void Shoot()

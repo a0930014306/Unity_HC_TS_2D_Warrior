@@ -1024,6 +1024,8 @@ MonoBehaviour:
   bulletspeed: 800
   shootaud: {fileID: 0}
   hp: 100
+  groundmove: {x: -0.44, y: -2, z: 0}
+  radius: 0.3
   h: 0
 --- !u!70 &568486383
 CapsuleCollider2D:
@@ -2294,7 +2296,7 @@ GameObject:
   - component: {fileID: 1207107255}
   - component: {fileID: 1207107254}
   - component: {fileID: 1207107253}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
