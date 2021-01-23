@@ -11,7 +11,7 @@ public class player : MonoBehaviour
     [Header("是否在地板上")]
     public bool ground = true;
     [Header("子彈")]
-    public Sprite bullet;
+    public GameObject bullet;
     [Header("子彈生成點")]
     public Transform bulletborn;
     [Header("子彈速度"), Range(0, 5000)]
@@ -24,8 +24,10 @@ public class player : MonoBehaviour
     public Vector3 groundmove;
     [Header("地面判定半徑")]
     public float radius = 0.5f;
+    [Header("鑰匙音效")]
+    public AudioClip keysound;
 
-    private AudioSource aud;
+    public AudioSource aud;
     private Rigidbody2D rig;
     private Animator ani;
 
@@ -43,6 +45,7 @@ public class player : MonoBehaviour
         //剛體欄位 = 取得原件<剛體>();
         rig = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        
 
 
     }
@@ -51,6 +54,8 @@ public class player : MonoBehaviour
         GetHorizontal();
         Move();
         Jump();
+        Shoot();
+        
     }
 
     //在 unity 繪製圖示
@@ -60,6 +65,21 @@ public class player : MonoBehaviour
         Gizmos.color = new Color(1, 0, 0, 0.35f);
         //圖示.繪製球體(中心點,半徑)
         Gizmos.DrawSphere(transform.position + groundmove, radius);
+    }
+
+
+    /// <summary>
+    /// 觸發事件:Enter進入時執行一次
+    /// </summary>
+    /// <param name="collision">碰到的物件資訊</param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "鑰匙") 
+        {
+            Destroy(collision.gameObject);
+            aud.PlayOneShot(keysound, Random.Range(1.2f, 1.5f));
+        }
+        
     }
     /// <summary>
     /// 取得水平軸向
@@ -125,8 +145,17 @@ public class player : MonoBehaviour
     }
 
     private void Shoot()
-    {
+    {    
+        //按下滑鼠左鍵(手機為觸控)
+        if (Input.GetKeyDown(KeyCode.Mouse0)) 
+        {
+            //音效來源.撥放一次音效(音效片段,音量)
+            aud.PlayOneShot(shootaud,Random.Range(1.2F,1.5F));
+            //區域變數 名稱 = 生成(物件,座標,角度)
+            GameObject temp = Instantiate(bullet, bulletborn.position, bulletborn.rotation);
 
+            temp.GetComponent<Rigidbody2D>().AddForce(bulletborn.right * bulletspeed + bulletborn.up * 150);
+        }
     }
 
     private void Hurt(float damage)
