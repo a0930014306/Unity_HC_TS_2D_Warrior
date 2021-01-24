@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using System.Collections;
 
 public class CameraControl2D : MonoBehaviour
 {
@@ -7,6 +8,12 @@ public class CameraControl2D : MonoBehaviour
     public Transform target;
     [Header("追蹤速度"),Range(0,100)]
     public float speed = 20;
+    [Header("晃動間隔"), Range(0, 1)]
+    public float shake = 0.05f;
+    [Header("晃動值"), Range(0, 5)]
+    public float shakevalue = 0.5f;
+    [Header("晃動次數"), Range(0, 10)]
+    public int shakecount = 3;
 
     /// <summary>
     /// 追蹤目標物件
@@ -34,6 +41,25 @@ public class CameraControl2D : MonoBehaviour
         Track();
     }
 
+    /// <summary>
+    /// 晃動效果
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Shake()
+    {
+        
 
+        for (int i = 0; i < shakecount; i++)
+        {
+
+            
+            transform.position += Vector3.up * shakevalue;
+            yield return new WaitForSeconds(shake);
+            transform.position -= Vector3.up * shakevalue;
+            yield return new WaitForSeconds(shake);
+
+        }
+        
+    }
 
 }

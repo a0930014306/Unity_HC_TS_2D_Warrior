@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
@@ -21,18 +22,22 @@ public class player : MonoBehaviour
     [Header("開槍音效")]
     public AudioClip shootaud;
     [Header("血量"), Range(0, 200)]
-    public int hp = 100;
+    public float hp = 100;
     [Header("地面判定位移")]
     public Vector3 groundmove;
     [Header("地面判定半徑")]
     public float radius = 0.5f;
     [Header("鑰匙音效")]
     public AudioClip keysound;
+    [Header("血量文字")]
+    public Text texthp;
+    [Header("血量圖片")]
+    public Image imghp;
 
     public AudioSource aud;
     private Rigidbody2D rig;
     private Animator ani;
-
+    private float hpMax;
     #endregion
 
     public float h;
@@ -47,7 +52,7 @@ public class player : MonoBehaviour
         //剛體欄位 = 取得原件<剛體>();
         rig = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
-        
+        hpMax = hp;
 
 
     }
@@ -165,13 +170,20 @@ public class player : MonoBehaviour
         
     }
 
-    private void Hurt(float damage)
+    public void Hurt(float damage)
     {
+        hp -= damage;                   //遞減
+        texthp.text = hp.ToString();    //血量文字.文字內容 = 血量.轉字串()
+        imghp.fillAmount = hp / hpMax;  //血量圖片.填滿長度 = 目前血量 / 最大血量;
 
+        if (hp <= 0) Dead();
     }
 
     private void Dead()
     {
-
+        hp = 0;
+        texthp.text = 0.ToString();
+        ani.SetBool("死亡開關", true);
+        enabled = false;
     }
 }
