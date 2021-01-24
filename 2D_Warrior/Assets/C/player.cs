@@ -16,6 +16,8 @@ public class player : MonoBehaviour
     public Transform bulletborn;
     [Header("子彈速度"), Range(0, 5000)]
     public int bulletspeed = 800;
+    [Header("子彈傷害"), Range(0, 5000)]
+    public int bulletdamage = 50;
     [Header("開槍音效")]
     public AudioClip shootaud;
     [Header("血量"), Range(0, 200)]
@@ -155,7 +157,12 @@ public class player : MonoBehaviour
             GameObject temp = Instantiate(bullet, bulletborn.position, bulletborn.rotation);
 
             temp.GetComponent<Rigidbody2D>().AddForce(bulletborn.right * bulletspeed + bulletborn.up * 150);
+
+            //暫存子彈.添加元件<子彈>().攻擊力 = 子彈傷害
+            temp.AddComponent<Bullet>().attack = bulletdamage;
         }
+
+        
     }
 
     private void Hurt(float damage)
