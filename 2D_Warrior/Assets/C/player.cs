@@ -34,6 +34,8 @@ public class player : MonoBehaviour
     public Text texthp;
     [Header("血量圖片")]
     public Image imghp;
+    [Header("結束畫面")]
+    public GameObject gamefinish;
 
     public AudioSource aud;
     private Rigidbody2D rig;
@@ -43,6 +45,7 @@ public class player : MonoBehaviour
 
     #endregion
 
+    //取得玩家軸向的值
     public float h;
     
 
@@ -209,5 +212,7 @@ public class player : MonoBehaviour
         ani.SetBool("死亡開關", true);
         rig.Sleep();
         enabled = false;
+
+        gamefinish.SetActive(true);
     }
 }

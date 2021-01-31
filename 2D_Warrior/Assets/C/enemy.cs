@@ -87,6 +87,12 @@ public class enemy : MonoBehaviour
         imghp.fillAmount = hp / hpMax;  //血量圖片.填滿長度 = 目前血量 / 最大血量;
 
         if (hp <= 0) Dead();
+
+        if (hp <= hpMax * 0.8)
+        {
+            issecond = true;
+            atkrange = 25;
+        }
     }
 
     private void Dead()
@@ -183,6 +189,8 @@ public class enemy : MonoBehaviour
         //如果(攻擊) 玩家.傷害(攻擊力)
         if (hit) player.Hurt(power);
         StartCoroutine(cam.Shake());
+
+        if (issecond) pssecond.Play();
     }
     
 
