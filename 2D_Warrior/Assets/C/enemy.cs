@@ -43,6 +43,8 @@ public class enemy : MonoBehaviour
     private float timer;
     private player player;
     private CameraControl2D cam;
+    private bool issecond;
+    private ParticleSystem pssecond;
 
     private void Start()
     {
@@ -53,6 +55,7 @@ public class enemy : MonoBehaviour
         //透過類型尋找物件<物件>() - 不能有重複物件
         player = FindObjectOfType<player>();
         cam = FindObjectOfType<CameraControl2D>();
+        pssecond = GameObject.Find("骷髏二階段").GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -68,6 +71,8 @@ public class enemy : MonoBehaviour
         Gizmos.color = new Color(0, 1, 0, 0.5f);
         Gizmos.DrawCube(transform.position + transform.right * offsetatk.x +transform.up * offsetatk.y ,sizeatk);
 
+        Gizmos.color = new Color(0, 1, 0, 0.5f);
+        Gizmos.DrawSphere(transform.position , atkrange);
     }
 
     /// <summary>
@@ -136,6 +141,11 @@ public class enemy : MonoBehaviour
         //動畫.設定布林值("走路開關" , 剛體.速度.值(vector轉為布林值) > 0)
         ani.SetBool("走路開關", rig.velocity.magnitude > 0);
 
+        //取得動畫控制器狀態資訊 資訊 = 動畫.取得正確動畫控制器狀態資訊(圖層);
+        AnimatorStateInfo info = ani.GetCurrentAnimatorStateInfo(0);
+        //如果 動畫是 骷髏攻擊 就 停止
+        if (info.IsName("骷髏攻擊")) return;
+
     }
 
     private void Attack()
@@ -153,6 +163,8 @@ public class enemy : MonoBehaviour
             timer = 0;
             StartCoroutine(DelayDamage());
         }
+
+        if (hp <= hpMax * 0.8f) atkrange = 10;
 
     }
 

@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class player : MonoBehaviour
 {
@@ -38,9 +39,12 @@ public class player : MonoBehaviour
     private Rigidbody2D rig;
     private Animator ani;
     private float hpMax;
+    private SpriteRenderer spr;
+
     #endregion
 
     public float h;
+    
 
     private void Start()
     {
@@ -52,6 +56,7 @@ public class player : MonoBehaviour
         //剛體欄位 = 取得原件<剛體>();
         rig = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        spr = GetComponent<SpriteRenderer>();
         hpMax = hp;
 
 
@@ -175,8 +180,26 @@ public class player : MonoBehaviour
         hp -= damage;                   //遞減
         texthp.text = hp.ToString();    //血量文字.文字內容 = 血量.轉字串()
         imghp.fillAmount = hp / hpMax;  //血量圖片.填滿長度 = 目前血量 / 最大血量;
+        StartCoroutine(HurtEffect());
 
         if (hp <= 0) Dead();
+    }
+
+    private IEnumerator HurtEffect()
+    {
+        float interval = 0.05f;
+
+        for (int i = 0; i < 5; i++)
+        {
+
+        Color red = new Color(1, 0.1f, 0.1f);
+        spr.color = red;
+        yield return new WaitForSeconds(0.1f);
+        spr.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+
+        }
+
     }
 
     private void Dead()
@@ -184,6 +207,7 @@ public class player : MonoBehaviour
         hp = 0;
         texthp.text = 0.ToString();
         ani.SetBool("死亡開關", true);
+        rig.Sleep();
         enabled = false;
     }
 }
