@@ -40,7 +40,7 @@ public class SceneController : MonoBehaviour
     {
         //音效來源,播放一次(音效, 音量)
         aud.PlayOneShot(soundtrack);
-
+        Time.timeScale = 1;
         Invoke("DelayStartgame", 1.5f);
     }
 
@@ -51,6 +51,7 @@ public class SceneController : MonoBehaviour
     public void BackToMenu()
     {
         aud.PlayOneShot(soundtrack);
+        Time.timeScale = 1;
         Invoke("DelayBackToMenu", 1.5f);
     }
 

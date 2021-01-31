@@ -9,11 +9,11 @@ ScriptsOnlyBuild:
     - SceneController
     - SoundManager
     - TeleportManager
+    - boss
     - enemy
     - enemymodetwo
     - player
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
@@ -83,41 +83,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11306}
     - Class: 114
-      Script: {instanceID: 11416}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11456}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11548}
+      Script: {instanceID: 11556}
     - Class: 114
-      Script: {instanceID: 11630}
+      Script: {instanceID: 11644}
     - Class: 114
-      Script: {instanceID: 11846}
+      Script: {instanceID: 11872}
     - Class: 114
-      Script: {instanceID: 11864}
+      Script: {instanceID: 11890}
     - Class: 114
-      Script: {instanceID: 11992}
-    - Class: 114
-      Script: {instanceID: 12060}
+      Script: {instanceID: 12024}
     - Class: 114
       Script: {instanceID: 12092}
     - Class: 114
-      Script: {instanceID: 12244}
+      Script: {instanceID: 12124}
     - Class: 114
-      Script: {instanceID: 12418}
+      Script: {instanceID: 12232}
     - Class: 114
-      Script: {instanceID: 12616}
+      Script: {instanceID: 12238}
     - Class: 114
-      Script: {instanceID: 12726}
+      Script: {instanceID: 12294}
     - Class: 114
-      Script: {instanceID: 13018}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 13054}
+      Script: {instanceID: 12674}
     - Class: 114
-      Script: {instanceID: 13080}
+      Script: {instanceID: 12792}
     - Class: 114
-      Script: {instanceID: 13110}
+      Script: {instanceID: 13104}
     - Class: 114
-      Script: {instanceID: 31760}
+      Script: {instanceID: 13142}
+    - Class: 114
+      Script: {instanceID: 13170}
+    - Class: 114
+      Script: {instanceID: 13202}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -188,23 +190,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11256}
     - Class: 114
-      Script: {instanceID: 11416}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11456}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11780}
+      Script: {instanceID: 11804}
     - Class: 114
-      Script: {instanceID: 11846}
+      Script: {instanceID: 11872}
     - Class: 114
-      Script: {instanceID: 11992}
+      Script: {instanceID: 12024}
     - Class: 114
-      Script: {instanceID: 12244}
+      Script: {instanceID: 12294}
     - Class: 114
-      Script: {instanceID: 12726}
+      Script: {instanceID: 12792}
     - Class: 114
-      Script: {instanceID: 13018}
+      Script: {instanceID: 13104}
     - Class: 114
-      Script: {instanceID: 13080}
+      Script: {instanceID: 13170}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -502,6 +504,18 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
+      Hash: a4b334133bdf73770156d0b0d45a2bde
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TeleportManager
+  - hash:
+      serializedVersion: 2
+      Hash: f15936c8b5de1d67ec31c1eb6bddc8d7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: boss
+  - hash:
+      serializedVersion: 2
       Hash: 4fd8bf02e3089425d3502e26c44ba31a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -734,12 +748,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: a4b334133bdf73770156d0b0d45a2bde
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TeleportManager
   platform: 20
   scenePathNames:
   - "Assets/\u5834\u666F/\u9078\u55AE.unity"
